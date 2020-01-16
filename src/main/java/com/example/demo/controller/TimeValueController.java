@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -46,16 +47,27 @@ public class TimeValueController {
 		return ti;
 	}
 	
+	//分页获取timevalue值
 	@ResponseBody
 	@RequestMapping(value="/pageInfo",produces = "html/text;charset=UTF-8")
-	public String pageInfo(@RequestParam int pageNumber,int pageSize,HttpServletResponse response) {
+	public String pageInfo(@RequestParam int pageNumber,int pageSize,String starttime,String endtime,HttpServletResponse response) {
 		response.setContentType("text/json");
         System.out.println(pageNumber+"===="+pageSize);
         response.setCharacterEncoding("utf-8");
         
         //userList查询要放到startPage下面
         PageHelper.startPage(pageNumber,pageSize);
-        List<TimeValue> userList=TimeValueMapper.SelectTimeValues();
+        System.out.println(starttime+"---"+endtime);
+        List<TimeValue> userList=new ArrayList<TimeValue>();
+        
+        if(starttime!=""&&endtime!="") {
+        	
+        	userList = TimeValueMapper.selectbytime(starttime, endtime);
+        }else {
+        	userList=TimeValueMapper.SelectTimeValues();
+        }
+        
+        
         PageInfo<TimeValue> page=new PageInfo<>(userList);
           //取出查询结果
         List<TimeValue> rows = page.getList();
@@ -69,7 +81,7 @@ public class TimeValueController {
 		
 	}
 	
-	
+	//按时间条件获取timevalue值
 	@ResponseBody
 	@RequestMapping(value="/getbysomevalue",produces = "html/text;charset=UTF-8")
 	public String getbysomevalue(@RequestParam int pageNumber,int pageSize,String yearvalue,String monthvalue,String dayvalue,HttpServletResponse response) {
@@ -96,6 +108,7 @@ public class TimeValueController {
 		
 	}
 	
+	//分页获取timeday值
 	@ResponseBody
 	@RequestMapping(value="/gettimeday",produces = "html/text;charset=UTF-8")
 	public String gettimeday(@RequestParam int pageNumber,int pageSize,HttpServletResponse response) {
@@ -123,7 +136,36 @@ public class TimeValueController {
 	}
 	
 	
-	
+	    //按时间条件获取timevalue值
+		@ResponseBody
+		@RequestMapping(value="/getbytime",produces = "html/text;charset=UTF-8")
+		public String getbytime(@RequestParam int pageNumber,int pageSize,String starttime,String endtime,HttpServletResponse response) {
+			response.setContentType("text/json");
+	        System.out.println(pageNumber+"===="+pageSize);
+	        response.setCharacterEncoding("utf-8");
+	        
+	        //userList查询要放到startPage下面
+	        PageHelper.startPage(pageNumber,pageSize);
+	       
+	        System.out.println(starttime+"---"+endtime);
+	        
+	        List<TimeValue> userList = TimeValueMapper.selectbytime(starttime, endtime);
+	        
+	        
+	        //List<TimeValue> userList = TimeValueMapper.selectbyday(yearvalue, monthvalue, dayvalue);
+	        
+	        PageInfo<TimeValue> page=new PageInfo<>(userList);
+	          //取出查询结果
+	        List<TimeValue> rows = page.getList();
+	        int total = (int) page.getTotal();
+	         //转换为json数据
+	        JSONObject result = new JSONObject();
+	        result.put("rows",rows);
+	        result.put("total",total);
+	        System.out.println(result.toJSONString());
+	        return result.toJSONString();
+			
+		}
 	
 	
 	

@@ -28,4 +28,9 @@ public interface TimeValueMapper {
     
     @Select("select * from TIME_VALUE where YearValue=#{yearvalue} and MonthValue=#{monthvalue} and DayValue=#{dayvalue}")
     List<TimeValue> selectbyday(@Param("yearvalue") String yearvalue,@Param("monthvalue") String monthvalue,@Param("dayvalue") String dayvalue);
+
+    @Select("select * from TIME_VALUE where time_value > #{starttime} and time_value < #{endtime}")
+    List<TimeValue> selectbytime(@Param("starttime") String starttime,@Param("endtime") String endtime);
+
+    
 }

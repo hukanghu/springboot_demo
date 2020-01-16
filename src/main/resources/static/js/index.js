@@ -1,3 +1,20 @@
+$(function () {
+        $('#datetimepicker2').datetimepicker({
+            format: 'YYYY-MM-DD HH:mm:ss',
+            locale: 'zh-CN'
+            
+        });
+        $('#datetimepicker3').datetimepicker({
+            format: 'YYYY-MM-DD HH:mm:ss',
+            locale: 'zh-CN'
+            
+        });
+ });	      
+      //清除的代码
+        $(".glyphicon-remove").click(function(){
+                $($($(this).parent()).prev()).val("");
+            });
+
 $("input[type='button']").click(function(){
 	$("bootstrap-table").bootstrapTable("refresh");
 });
@@ -42,7 +59,10 @@ $("#bootstrap-table").bootstrapTable({
 	cardView : false, //是否显示详细视图
 	detailView : false, //是否显示父子表
 	});
-	 
+
+
+
+ 
 	 
 	function queryParam(params){
 			
@@ -51,7 +71,9 @@ $("#bootstrap-table").bootstrapTable({
 	    			limit : $('#bootstrap-table').bootstrapTable('getOptions').totalRows, // 页面大小
 	    	        offset : 1, // 页码
 	    	        pageNumber : 1,
-	    	        pageSize : $('#bootstrap-table').bootstrapTable('getOptions').totalRows
+	    	        pageSize : $('#bootstrap-table').bootstrapTable('getOptions').totalRows,
+	    	        starttime:$("#datetimepicker2").find("input").val(),
+	    			endtime:$("#datetimepicker3").find("input").val()
 	    	};
 	    	return param;
 			
@@ -60,7 +82,9 @@ $("#bootstrap-table").bootstrapTable({
 	    			limit : params.limit, // 页面大小
 	    	        offset : params.offset, // 页码
 	    	        pageNumber : this.pageNumber,
-	    	        pageSize : this.pageSize
+	    	        pageSize : this.pageSize,
+	    	        starttime:$("#datetimepicker2").find("input").val(),
+	    			endtime:$("#datetimepicker3").find("input").val()
 	    	};
 	    	return param;
 			
@@ -83,14 +107,58 @@ $("#bootstrap-table").bootstrapTable({
 
 	}
 	
-var html =$("#model").html();
+	 var html =$("#model").html();
 
-$("body > div > div.bootstrap-table.bootstrap3 > div.fixed-table-toolbar").prepend(html);
+     $("body > div > div.bootstrap-table.bootstrap3 > div.fixed-table-toolbar").prepend(html);
+
 	
 
 function exportall(){
 	location.href="/util/excelExport_object";
 }
+
+
+function selectbytime(){
 	
+	var time_start=$("#datetimepicker2").find("input").val();
+	var time_end=$("#datetimepicker3").find("input").val();
+	if(time_start > time_end){
+		layer.alert("起始时间不可以大于结束时间！");
+		return false;	
+	}
+
+    $("#bootstrap-table").bootstrapTable('refresh');
 	
+}
+
+/*function clickselect(){
+	var time_start=$("#datetimepicker2").find("input").val();
+	var time_end=$("#datetimepicker3").find("input").val();
+	if(time_start > time_end){
+		layer.alert("起始时间不可以大于结束时间！");
+		return false;	
+	}
+	$.ajax({
+		type: "post",
+		url: "/TimeValue/getbytime",
+		data: {
+			starttime:time_start,
+			endtime:time_end,
+			pageNumber:1,
+    		pageSize:15
+		},
+		dataType:"json",
+		success : function(json) {
+			$("#bootstrap-table").bootstrapTable('load', json);
+		}
+	});
+	
+}*/
+
+
+
+
+
+
+
 	
