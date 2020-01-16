@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.TimeValueMapper">
+  <resultMap id="BaseResultMap" type="com.example.demo.pojo.TimeValue">
+    <id column="PID" jdbcType="INTEGER" property="pid" />
+    <result column="YearValue" jdbcType="VARCHAR" property="yearvalue" />
+    <result column="MonthValue" jdbcType="VARCHAR" property="monthvalue" />
+    <result column="DayValue" jdbcType="VARCHAR" property="dayvalue" />
+    <result column="HourValue" jdbcType="VARCHAR" property="hourvalue" />
+    <result column="MIValue" jdbcType="VARCHAR" property="mivalue" />
+    <result column="SSValue" jdbcType="VARCHAR" property="ssvalue" />
+    <result column="WeekValue" jdbcType="VARCHAR" property="weekvalue" />
+    <result column="Q_VALUE" jdbcType="VARCHAR" property="qValue" />
+    <result column="WW_VALUE" jdbcType="VARCHAR" property="wwValue" />
+    <result column="D_VALUE" jdbcType="VARCHAR" property="dValue" />
+    <result column="DDD_VALUE" jdbcType="VARCHAR" property="dddValue" />
+    <result column="time_value" jdbcType="TIMESTAMP" property="timeValue" />
+    <result column="sql" jdbcType="VARCHAR" property="sql" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    PID, YearValue, MonthValue, DayValue, HourValue, MIValue, SSValue, WeekValue, Q_VALUE, 
+    WW_VALUE, D_VALUE, DDD_VALUE, time_value, sql
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TIME_VALUE
+    where PID = #{pid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from TIME_VALUE
+    where PID = #{pid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.pojo.TimeValue">
+    insert into TIME_VALUE (PID, YearValue, MonthValue, 
+      DayValue, HourValue, MIValue, 
+      SSValue, WeekValue, Q_VALUE, 
+      WW_VALUE, D_VALUE, DDD_VALUE, 
+      time_value, sql)
+    values (#{pid,jdbcType=INTEGER}, #{yearvalue,jdbcType=VARCHAR}, #{monthvalue,jdbcType=VARCHAR}, 
+      #{dayvalue,jdbcType=VARCHAR}, #{hourvalue,jdbcType=VARCHAR}, #{mivalue,jdbcType=VARCHAR}, 
+      #{ssvalue,jdbcType=VARCHAR}, #{weekvalue,jdbcType=VARCHAR}, #{qValue,jdbcType=VARCHAR}, 
+      #{wwValue,jdbcType=VARCHAR}, #{dValue,jdbcType=VARCHAR}, #{dddValue,jdbcType=VARCHAR}, 
+      #{timeValue,jdbcType=TIMESTAMP}, #{sql,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.demo.pojo.TimeValue">
+    insert into TIME_VALUE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pid != null">
+        PID,
+      </if>
+      <if test="yearvalue != null">
+        YearValue,
+      </if>
+      <if test="monthvalue != null">
+        MonthValue,
+      </if>
+      <if test="dayvalue != null">
+        DayValue,
+      </if>
+      <if test="hourvalue != null">
+        HourValue,
+      </if>
+      <if test="mivalue != null">
+        MIValue,
+      </if>
+      <if test="ssvalue != null">
+        SSValue,
+      </if>
+      <if test="weekvalue != null">
+        WeekValue,
+      </if>
+      <if test="qValue != null">
+        Q_VALUE,
+      </if>
+      <if test="wwValue != null">
+        WW_VALUE,
+      </if>
+      <if test="dValue != null">
+        D_VALUE,
+      </if>
+      <if test="dddValue != null">
+        DDD_VALUE,
+      </if>
+      <if test="timeValue != null">
+        time_value,
+      </if>
+      <if test="sql != null">
+        sql,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pid != null">
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="yearvalue != null">
+        #{yearvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="monthvalue != null">
+        #{monthvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="dayvalue != null">
+        #{dayvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="hourvalue != null">
+        #{hourvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="mivalue != null">
+        #{mivalue,jdbcType=VARCHAR},
+      </if>
+      <if test="ssvalue != null">
+        #{ssvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="weekvalue != null">
+        #{weekvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="qValue != null">
+        #{qValue,jdbcType=VARCHAR},
+      </if>
+      <if test="wwValue != null">
+        #{wwValue,jdbcType=VARCHAR},
+      </if>
+      <if test="dValue != null">
+        #{dValue,jdbcType=VARCHAR},
+      </if>
+      <if test="dddValue != null">
+        #{dddValue,jdbcType=VARCHAR},
+      </if>
+      <if test="timeValue != null">
+        #{timeValue,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sql != null">
+        #{sql,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.pojo.TimeValue">
+    update TIME_VALUE
+    <set>
+      <if test="yearvalue != null">
+        YearValue = #{yearvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="monthvalue != null">
+        MonthValue = #{monthvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="dayvalue != null">
+        DayValue = #{dayvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="hourvalue != null">
+        HourValue = #{hourvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="mivalue != null">
+        MIValue = #{mivalue,jdbcType=VARCHAR},
+      </if>
+      <if test="ssvalue != null">
+        SSValue = #{ssvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="weekvalue != null">
+        WeekValue = #{weekvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="qValue != null">
+        Q_VALUE = #{qValue,jdbcType=VARCHAR},
+      </if>
+      <if test="wwValue != null">
+        WW_VALUE = #{wwValue,jdbcType=VARCHAR},
+      </if>
+      <if test="dValue != null">
+        D_VALUE = #{dValue,jdbcType=VARCHAR},
+      </if>
+      <if test="dddValue != null">
+        DDD_VALUE = #{dddValue,jdbcType=VARCHAR},
+      </if>
+      <if test="timeValue != null">
+        time_value = #{timeValue,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sql != null">
+        sql = #{sql,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where PID = #{pid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.pojo.TimeValue">
+    update TIME_VALUE
+    set YearValue = #{yearvalue,jdbcType=VARCHAR},
+      MonthValue = #{monthvalue,jdbcType=VARCHAR},
+      DayValue = #{dayvalue,jdbcType=VARCHAR},
+      HourValue = #{hourvalue,jdbcType=VARCHAR},
+      MIValue = #{mivalue,jdbcType=VARCHAR},
+      SSValue = #{ssvalue,jdbcType=VARCHAR},
+      WeekValue = #{weekvalue,jdbcType=VARCHAR},
+      Q_VALUE = #{qValue,jdbcType=VARCHAR},
+      WW_VALUE = #{wwValue,jdbcType=VARCHAR},
+      D_VALUE = #{dValue,jdbcType=VARCHAR},
+      DDD_VALUE = #{dddValue,jdbcType=VARCHAR},
+      time_value = #{timeValue,jdbcType=TIMESTAMP},
+      sql = #{sql,jdbcType=VARCHAR}
+    where PID = #{pid,jdbcType=INTEGER}
+  </update>
+</mapper>

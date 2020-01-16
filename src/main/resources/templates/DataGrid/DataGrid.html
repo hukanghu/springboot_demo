@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+        table
+        {
+            border-collapse: collapse;
+            margin: 0 auto;
+            text-align: center;
+        }
+        table td, table th
+        {
+            border: 1px solid #cad9ea;
+            color: #666;
+            height: 30px;
+        }
+        table thead th
+        {
+            background-color: #CCE8EB;
+            width: 100px;
+        }
+        table tr:nth-child(odd)
+        {
+            background: #fff;
+        }
+        table tr:nth-child(even)
+        {
+            background: #F5FAFA;
+        }
+</style>
+</head>
+<body>
+	<table width="90%" class="table">
+		<caption>
+            <h2>  时    间   </h2>
+        </caption>
+        <thead>
+            <tr>
+                <th>PID</th>
+                <th>年</th>
+                <th>月</th>
+                <th>日</th>
+                <th>时</th>
+                <th>分</th>
+                <th>秒</th>
+                <th>星期</th>
+                <th>第几季度</th>
+                <th>当年第几周</th>
+                <th>当周第几天</th>
+                <th>当年第几天</th>
+                <th style="width:200px;">当前日期</th>
+            </tr>
+        </thead>
+        
+		<tr th:each="timev:${timevalue}">
+			<td th:text="${timev.pid}"></td>
+			<td th:text="${timev.yearvalue}"></td>
+			<td th:text="${timev.monthvalue}"></td>
+			<td th:text="${timev.dayvalue}"></td>
+			<td th:text="${timev.hourvalue}"></td>
+			<td th:text="${timev.mivalue}"></td>
+			<td th:text="${timev.ssvalue}"></td>
+			<td th:text="${timev.weekvalue}"></td>
+			<td th:text="${timev.qValue}"></td>
+			<td th:text="${timev.wwValue}"></td>
+			<td th:text="${timev.dValue}"></td>
+			<td th:text="${timev.dddValue}"></td>
+			<td th:text="${#dates.format(timev.timeValue,'yyyy-MM-dd HH:mm:ss.SSS')}"></td>
+		</tr>
+	</table>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+
+    <classPathEntry
+            location="D:\maven_cangku_eclipse\repository\com\microsoft\sqlserver\sqljdbc42\4.2\sqljdbc42-4.2.jar" />
+    <context id="context1">
+        <!--<commentGenerator> <!– 去除自动生成的注释 –> <property name="suppressAllComments"
+            value="true" /> </commentGenerator> -->
+        <!-- 是否生成注释 去除自动生成的注释 -->
+        <commentGenerator>
+            <property name="suppressDate" value="true" />
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+        <!-- 数据库连接配置 -->
+        <jdbcConnection
+                driverClass="com.microsoft.sqlserver.jdbc.SQLServerDriver"
+                connectionURL="jdbc:sqlserver://localhost:1433;DatabaseName=PersonDB"
+                userId="sa"
+                password="123456" />
+
+        <!-- 非必需，类型处理器，在数据库类型和java类型之间的转换控制 -->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+
+        <!--配置生成的实体包 targetPackage：生成的实体包位置，默认存放在src目录下 targetProject：目标工程名 -->
+        <javaModelGenerator targetPackage="com.example.demo.pojo"
+                            targetProject=".\src">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+        <!-- 实体包对应映射文件位置及名称，默认存放在src目录下 -->
+        <sqlMapGenerator targetPackage="com.example.demo.mapper"
+                         targetProject=".\src">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+        <!--生成Dao类存放位置 -->
+        <javaClientGenerator type="XMLMAPPER"
+                             targetPackage="com.example.demo.dao" targetProject=".\src">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+
+        <!--生成对应表及类名 -->
+        <!-- 配置表 schema：不用填写 tableName: 表名 enableCountByExample、enableSelectByExample、enableDeleteByExample、enableUpdateByExample、selectByExampleQueryId：
+            去除自动生成的例子 -->
+
+
+        <table schema="" tableName="TIME_VALUE"
+               enableCountByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" enableUpdateByExample="false"
+               selectByExampleQueryId="false" enableDeleteByPrimaryKey="true"
+               enableSelectByPrimaryKey="true" enableUpdateByPrimaryKey="true" />
+        <table schema="" tableName="STUDENT_CLASS"
+               enableCountByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" enableUpdateByExample="false"
+               selectByExampleQueryId="false" enableDeleteByPrimaryKey="true"
+               enableSelectByPrimaryKey="true" enableUpdateByPrimaryKey="true" />
+    </context>
+</generatorConfiguration>
