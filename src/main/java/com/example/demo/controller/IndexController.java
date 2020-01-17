@@ -20,5 +20,9 @@ public class IndexController {
 	    	return "tablejoin/FatherAndSon";
 	    }
 	    
-	    
+	    @RequestMapping("/task")
+	    public String index_task() {
+	    	
+	    	return "html/TaskSwitch";
+	    }
 }
