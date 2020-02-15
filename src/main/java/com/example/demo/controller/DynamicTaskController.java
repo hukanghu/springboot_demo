@@ -11,7 +11,9 @@ import org.springframework.scheduling.support.CronTrigger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
+import com.alibaba.fastjson.JSONObject;
 import com.example.demo.utils.CronTestConfiguration;
 import com.example.demo.utils.MyRunnable1;
 import com.example.demo.utils.MyRunnable2;
@@ -19,8 +21,7 @@ import com.example.demo.utils.MyRunnable2;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-@Controller
-@Api(description = "定时任务")
+@RestController
 @RequestMapping("/task")
 public class DynamicTaskController {
 
@@ -35,8 +36,7 @@ public class DynamicTaskController {
 	private ScheduledFuture future2;
 	
 	
-	@RequestMapping("/startCron1")
-	@ResponseBody
+	@RequestMapping(value = "/startCron1", produces = "application/json;charset=UTF-8")
 	@ApiOperation("开启定时任务1")
 	public String startCrons() {
 		
@@ -54,22 +54,28 @@ public class DynamicTaskController {
             }
         });
         System.out.println("DynamicTask.startCron1()");
-        return "success";
+        //转换为json数据
+        JSONObject result = new JSONObject();
+        result.put("data","success");
+        System.out.println(result.toJSONString());
+        return result.toJSONString();
     }
 
-	@RequestMapping("/stopCron1")
-	@ResponseBody
+	@RequestMapping(value = "/stopCron1", produces = "application/json;charset=UTF-8")
     @ApiOperation("关闭定时任务1")
     public String stopCron1() {
         if (future1 != null) {
             future1.cancel(true);
         }
         System.out.println("DynamicTask.stopCron1()");
-        return "success";
+      //转换为json数据
+        JSONObject result = new JSONObject();
+        result.put("data","success");
+        System.out.println(result.toJSONString());
+        return result.toJSONString();
     }
 	
 	@RequestMapping("/startCron2")
-	@ResponseBody
 	@ApiOperation("开启定时任务 2")
 	public String startCrons2() {
 		
@@ -91,7 +97,6 @@ public class DynamicTaskController {
     }
 
 	@RequestMapping("/stopCron2")
-	@ResponseBody
     @ApiOperation("关闭定时任务2")
     public String stopCron2() {
         if (future2 != null) {

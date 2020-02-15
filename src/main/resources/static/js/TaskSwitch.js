@@ -7,7 +7,8 @@ $(function(){
         onSwitchChange: function (event, state) {
             //监听switch change事件，可以根据状态把相应的业务逻辑代码写在这里
             if (state == true) {
-                starttask1();
+               starttask1();
+               
             } else {
                 stoptask1();
             }
@@ -30,13 +31,24 @@ $(function(){
 });
 
 function starttask1(){
-	$.ajax({
+	
+ 	$.ajax({
 		type: "post",
 		url: "/task/startCron1",
 		data: {},
 		dataType:"json",
 		success : function(data) {
-			alert(data);
+			if(data.data=="success"){
+   				//alert("开启成功！");
+   				bootoast({
+   				    message: '开启成功！',
+   					 type: 'success',
+   					 position:'right-bottom',
+   					 timeout:2
+   			    });
+   			}else{
+   				alert("开启失败！");
+   			}
 		}
 	});
 	
@@ -49,7 +61,17 @@ function stoptask1(){
 		data: {},
 		dataType:"json",
 		success : function(data) {
-			alert(data);
+			if(data.data=="success"){
+   				//alert("开启成功！");
+   				bootoast({
+   				    message: '关闭成功！',
+   					 type: 'success',
+   					 position:'right-bottom',
+   					 timeout:2
+   			    });
+   			}else{
+   				alert("关闭失败！");
+   			}
 		}
 	});
 	
