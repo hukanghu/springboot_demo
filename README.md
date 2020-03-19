@@ -1,6 +1,8 @@
 # springboot_demo
 springboot 练习
-数据库：sql server
+数据库：sql server 2008R2 需要电脑安装数据库
+数据库脚本：sbsql 文件夹下,直接执行就行
+安装包:installFiles 文件夹下 ,redis 安装64位msi文件
 
 1,http://localhost:8080/TimeValue/SelectAll 第一版表格
 
